@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/form', 'NewsController@form');
+
+Route::post('/view', 'NewsController@view');
