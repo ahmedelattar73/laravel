@@ -3,22 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\News;
+
 
 class NewsController extends Controller
 {
 
-    public function form()
+    public function all_news(Request $request)
     {
-        return view('layout.form');
-    }
-
-
-    public function view()
-    {
-
-        $data = request()->all();
-
-        return view('layout.view', ['data' => $data]);
+        $all_news = News::orderBy('id', 'desc')->paginate(4);
+        return view('layout.all_news', ['all_news'=>$all_news]);
     }
 
 

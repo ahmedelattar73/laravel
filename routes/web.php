@@ -18,3 +18,6 @@ Route::get('/', function () {
 Route::get('/form', 'NewsController@form');
 
 Route::post('/view', 'NewsController@view');
+
+
+Route::get('/allnews', 'NewsController@all_news');

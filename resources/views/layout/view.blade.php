@@ -14,7 +14,9 @@
 <h1>Hello from View Page</h1>
 
 <ul>
-    <li> Name: {{ $data['name'] }} </li>
+    @if($emp)
+        <li> Name: {{ $data['name'] }} </li>
+    @endif
     <li> email: {{ $data['email'] }} </li>
     <li> password: {{ $data['password'] }} </li>
 </ul>
