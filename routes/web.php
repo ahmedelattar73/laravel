@@ -19,5 +19,8 @@ Route::get('/form', 'NewsController@form');
 
 Route::post('/view', 'NewsController@view');
 
-
 Route::get('/allnews', 'NewsController@all_news');
+
+Route::post('insert/news', 'NewsController@insert_news');
+
+Route::post('news/delete/{id?}', 'NewsController@delete');
