@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\News;
+use Illuminate\Http\Request;
 
 
 class NewsController extends Controller
@@ -18,21 +18,33 @@ class NewsController extends Controller
 
     public function insert_news()
     {
-/*        News::create([
-            'title'     => request('title'),
-            'desc'      => request('desc'),
-            'content'   => request('content'),
-            'add_by'    => request('add_by'),
-            'status'    => request('status')
-        ]);*/
+        $customMessages = [
+            'title'     => trans('admin.title'),
+            'desc'      => trans('admin.desc'),
+            'content'   => trans('admin.content'),
+            'add_by'    => trans('admin.add_by'),
+            'status'    => trans('admin.status')
+        ];
 
-        $add = new News;
-        $add->title = request('title');
-        $add->desc = request('desc');
-        $add->content = request('content');
-        $add->add_by = request('add_by');
-        $add->status = request('status');
-        $add->save();
+        $data = $this->validate(request(), [
+            'title'     => 'required',
+            'desc'      => 'required',
+            'content'   => 'required',
+            'add_by'    => 'required',
+            'status'    => 'required'
+        ], [], $customMessages);
+
+       News::create($data);
+
+        session()->flash('added_post', 'your post has been added.');
+
+/*        $add = new News;
+        $add->title     = request('title');
+        $add->desc      = request('desc');
+        $add->content   = request('content');
+        $add->add_by    = request('add_by');
+        $add->status    = request('status');
+        $add->save();*/
 
         //return redirect('allnews');
         return back();
@@ -47,7 +59,7 @@ class NewsController extends Controller
         } elseif ( request()->has('id') ) {
             News::destroy(request('id'));
         }
-        return redirect()->action('NewsController@all_news', ['msg' => 'deleted']);
+        return redirect('allnews');
     }
 
 }
