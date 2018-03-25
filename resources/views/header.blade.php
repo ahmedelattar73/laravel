@@ -15,8 +15,10 @@
 
 
 <header>
-    <ul style="overflow: hidden;">
-        <li style="float: left">Home</li>
-        <li style="float: left">news</li>
-    </ul>
+    <div class="container">
+        <ul style="overflow: hidden;">
+            <li style="float: left">Home</li>
+            <li style="float: left">news</li>
+        </ul>
+    </div>
 </header>

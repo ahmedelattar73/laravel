@@ -15,12 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/form', 'NewsController@form');
 
-Route::post('/view', 'NewsController@view');
+//Route::group(['middleware' => 'news'], function () {
+    Route::get('/news', 'NewsController@all_news');
+    Route::get('/news/add', 'NewsController@add_post_form');
+    Route::post('news/insert', 'NewsController@insert_news');
+    Route::post('news/delete/{id?}', 'NewsController@delete');
+//});
 
-Route::get('/allnews', 'NewsController@all_news');
 
-Route::post('insert/news', 'NewsController@insert_news');
+//Route::get('/news', 'NewsController@all_news')->middleware('news');
 
-Route::post('news/delete/{id?}', 'NewsController@delete');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

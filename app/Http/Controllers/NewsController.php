@@ -9,11 +9,22 @@ use Illuminate\Http\Request;
 class NewsController extends Controller
 {
 
+
+/*    public function __construct()
+    {
+        $this->middleware('news');
+    }*/
+
     public function all_news(Request $request)
     {
         $all_news = News::orderBy('id', 'desc')->paginate(5);
         //$all_news = News::orderBy('id', 'desc')->get(['desc', 'id']);
         return view('layout.all_news', ['all_news'=>$all_news]);
+    }
+
+    public function add_post_form ()
+    {
+        return view('layout.form');
     }
 
     public function insert_news()
@@ -34,9 +45,9 @@ class NewsController extends Controller
             'status'    => 'required'
         ], [], $customMessages);
 
-       News::create($data);
+        News::create($data);
 
-        session()->flash('added_post', 'your post has been added.');
+        session()->flash('added_post', trans('admin.post_added'));
 
 /*        $add = new News;
         $add->title     = request('title');
@@ -59,7 +70,7 @@ class NewsController extends Controller
         } elseif ( request()->has('id') ) {
             News::destroy(request('id'));
         }
-        return redirect('allnews');
+        return redirect('news');
     }
 
 }
