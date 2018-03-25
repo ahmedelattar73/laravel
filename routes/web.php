@@ -16,12 +16,12 @@ Route::get('/', function () {
 });
 
 
-//Route::group(['middleware' => 'news'], function () {
+Route::group(['middleware' => 'news'], function () {
     Route::get('/news', 'NewsController@all_news');
     Route::get('/news/add', 'NewsController@add_post_form');
     Route::post('news/insert', 'NewsController@insert_news');
     Route::post('news/delete/{id?}', 'NewsController@delete');
-//});
+});
 
 
 //Route::get('/news', 'NewsController@all_news')->middleware('news');
